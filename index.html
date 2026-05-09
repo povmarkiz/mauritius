@@ -600,6 +600,12 @@ nav {
   overflow: hidden;
   background: var(--cream3);
 }
+@media (max-width: 768px) {
+  .villa-carousel {
+    height: auto;
+    aspect-ratio: 4/3;
+  }
+}
 .carousel-track {
   display: flex;
   height: 100%;
@@ -681,7 +687,6 @@ nav {
 .carousel-thumbs {
   display: flex;
   gap: 3px;
-  background: var(--text);
   padding: 3px;
   flex-shrink: 0;
 }
@@ -990,7 +995,6 @@ footer {
   .day-bg-num { font-size: 100px; bottom: -10px; }
   .team-grid { grid-template-columns: 1fr; }
   .villa-layout { grid-template-columns: 1fr; }
-  .villa-carousel { min-height: 280px; }
   .carousel-thumbs { height: 60px; }
   .carousel-thumb { height: 60px; }
   .included-grid { grid-template-columns: 1fr; }
