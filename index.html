@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Маврикий — Август 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Caveat:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ── TOKENS ── */
+:root {
+  --cream:      #F4EEE3;
+  --cream2:     #EDE4D4;
+  --cream3:     #E4D9C6;
+  --card:       #FDFAF5;
+  --white:      #FFFFFF;
+  --green:      #2A5C3C;
+  --green2:     #3D7A52;
+  --amber:      #C87840;
+  --text:       #1A2218;
+  --text2:      #4A5248;
+  --text3:      #8A9088;
+  --border:     #DDD5C4;
+  --border2:    #C8BCA8;
+}
+
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(244, 238, 227, 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+.nav-logo em { font-style: italic; color: var(--green); }
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  color: var(--text2);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--green); }
+.nav-cta {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green);
+  border: 1.5px solid var(--green);
+  padding: 9px 22px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--green); color: var(--white); }
+
+/* ── HERO / POSTCARD ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 90px 24px 56px;
+  background: var(--cream);
+}
+
+/* Paper texture via subtle CSS noise */
+.hero::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 128px;
+}
+
+.postcard {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 740px;
+  background: var(--white);
+  box-shadow:
+    0 2px 4px rgba(26,34,24,0.05),
+    0 8px 32px rgba(26,34,24,0.10),
+    0 24px 64px rgba(26,34,24,0.08);
+  transform: rotate(-0.4deg);
+}
+
+.postcard-photo {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+.postcard-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  filter: saturate(0.88) brightness(0.96);
+}
+.postcard-photo-label {
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  background: rgba(253,250,245,0.88);
+  padding: 4px 12px 3px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text);
+  font-weight: 400;
+}
+
+/* ── POSTCARD BACK ── */
+.postcard-back {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  min-height: 220px;
+  border-top: 1px solid var(--border2);
+  background: var(--white);
+  /* Lined paper on left side via gradient */
+}
+
+.postcard-left {
+  padding: 28px 32px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 31px,
+    rgba(0,0,0,0.055) 31px,
+    rgba(0,0,0,0.055) 32px
+  );
+  background-position: 0 44px;
+}
+.postcard-divider {
+  background: var(--border2);
+  width: 1px;
+}
+.postcard-right {
+  padding: 22px 24px 22px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.postcard-greeting {
+  font-family: 'Caveat', cursive;
+  font-size: 26px;
+  line-height: 1.45;
+  color: var(--text);
+}
+.postcard-sub {
+  font-family: 'Caveat', cursive;
+  font-size: 19px;
+  line-height: 1.5;
+  color: var(--text2);
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.postcard-sig {
+  font-family: 'Caveat', cursive;
+  font-size: 21px;
+  color: var(--green);
+  margin-top: 8px;
+}
+
+/* Postmark + Stamp row */
+.postmark-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.postmark-svg {
+  width: 68px; height: 68px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+/* Perforated stamp */
+.stamp {
+  width: 54px;
+  height: 68px;
+  flex-shrink: 0;
+  border: 1.5px solid var(--border2);
+  overflow: hidden;
+  position: relative;
+  /* Simulate perforation with radial gradients */
+  background:
+    radial-gradient(circle at top left,    var(--cream) 3.5px, transparent 3.5px),
+    radial-gradient(circle at top right,   var(--cream) 3.5px, transparent 3.5px),
+    radial-gradient(circle at bottom left, var(--cream) 3.5px, transparent 3.5px),
+    radial-gradient(circle at bottom right,var(--cream) 3.5px, transparent 3.5px),
+    var(--white);
+  clip-path: polygon(
+    0% 8%, 5% 0%, 10% 8%, 15% 0%, 20% 8%, 25% 0%, 30% 8%, 35% 0%, 40% 8%, 45% 0%, 50% 8%, 55% 0%, 60% 8%, 65% 0%, 70% 8%, 75% 0%, 80% 8%, 85% 0%, 90% 8%, 95% 0%, 100% 8%,
+    100% 92%, 95% 100%, 90% 92%, 85% 100%, 80% 92%, 75% 100%, 70% 92%, 65% 100%, 60% 92%, 55% 100%, 50% 92%, 45% 100%, 40% 92%, 35% 100%, 30% 92%, 25% 100%, 20% 92%, 15% 100%, 10% 92%, 5% 100%, 0% 92%
+  );
+}
+.stamp img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(0.7) brightness(1.05);
+}
+
+.address-block { flex: 1; }
+.address-label {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 5px;
+}
+.address-to {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text);
+  display: block;
+}
+.address-from {
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  font-size: 12.5px;
+  color: var(--text3);
+  letter-spacing: 0.3px;
+}
+
+/* Hero scroll indicator */
+.hero-scroll {
+  position: relative;
+  z-index: 1;
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--text3);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+.scroll-line {
+  width: 1px;
+  height: 44px;
+  background: var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: var(--green);
+  animation: line-drop 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@keyframes line-drop {
+  0%   { top: -50%; }
+  100% { top: 150%; }
+}
+
+/* ── SECTION COMMONS ── */
+.section {
+  padding: 100px 24px;
+}
+.section-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.section-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--green2);
+  font-weight: 400;
+  margin-bottom: 14px;
+  display: block;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 5.5vw, 80px);
+  font-weight: 300;
+  line-height: 1.0;
+  color: var(--text);
+  margin-bottom: 56px;
+}
+.section-title em { font-style: italic; color: var(--green); }
+
+/* ── INTRO ── */
+.intro {
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 72px 24px;
+}
+.intro-inner {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.intro-photo {
+  height: 460px;
+  overflow: hidden;
+}
+.intro-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: saturate(0.85);
+}
+.intro-text-col {}
+.intro-text {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--text2);
+  font-weight: 300;
+}
+.intro-text + .intro-text { margin-top: 20px; }
+.intro-text strong { font-weight: 500; color: var(--text); }
+.intro-dates {
+  display: flex;
+  gap: 32px;
+  margin-top: 40px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border);
+}
+.intro-date-item {}
+.intro-date-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text3);
+  display: block;
+  margin-bottom: 4px;
+}
+.intro-date-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text);
+}
+
+/* ── PROGRAM ── */
+.program { background: var(--cream); padding-bottom: 0; }
+.program .section-inner { padding-bottom: 0; }
+
+.days-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+.day-item {
+  display: flex;
+  min-height: 500px;
+  border-top: 1px solid var(--border);
+}
+.day-item:last-child { border-bottom: 1px solid var(--border); }
+
+.day-item.reverse { flex-direction: row-reverse; }
+
+.day-photo {
+  width: 52%;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+.day-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+.day-item:hover .day-photo img { transform: scale(1.04); }
+
+.day-content {
+  flex: 1;
+  background: var(--card);
+  padding: 56px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.day-bg-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 160px;
+  font-weight: 300;
+  line-height: 1;
+  color: rgba(42, 92, 60, 0.05);
+  position: absolute;
+  bottom: -20px;
+  right: 24px;
+  pointer-events: none;
+  user-select: none;
+}
+.day-tag {
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--green2);
+  margin-bottom: 14px;
+  display: block;
+}
+.day-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 3.5vw, 52px);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--text);
+  margin-bottom: 26px;
+}
+.day-title em { font-style: italic; color: var(--green); }
+.day-body {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text2);
+  font-weight: 300;
+  max-width: 400px;
+  position: relative;
+  z-index: 1;
+}
+.day-body p + p { margin-top: 14px; }
+.day-body strong, .day-body b { font-weight: 500; color: var(--text); }
+.day-body em { font-style: italic; color: var(--green); }
+
+/* ── TEAM ── */
+.team { background: var(--cream2); padding-bottom: 0; }
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 56px;
+}
+.person {
+  background: var(--card);
+  padding: 56px 52px;
+}
+.person-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 54px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.person-handle {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--green2);
+  margin-bottom: 28px;
+  display: block;
+}
+.person-text {
+  font-size: 15px;
+  line-height: 1.88;
+  color: var(--text2);
+  font-weight: 300;
+}
+.person-text p + p { margin-top: 16px; }
+.team-quote {
+  grid-column: 1 / -1;
+  background: var(--green);
+  padding: 56px 52px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.5;
+}
+
+/* ── VILLA ── */
+.villa { background: var(--card); }
+.villa-layout {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 0;
+  margin-top: 56px;
+  border: 1px solid var(--border);
+}
+.villa-photo {
+  height: 580px;
+  overflow: hidden;
+}
+.villa-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 50%;
+}
+.villa-info {
+  background: var(--cream2);
+  padding: 52px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.villa-desc {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text2);
+}
+.villa-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.feature:first-child { border-top: 1px solid var(--border); }
+.feature-icon {
+  font-size: 18px;
+  line-height: 1;
+  margin-top: 2px;
+  width: 24px;
+  flex-shrink: 0;
+}
+.feature-text strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.feature-text span {
+  font-size: 13px;
+  color: var(--text3);
+}
+.villa-link {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--green);
+  border-bottom: 1px solid var(--green);
+  padding-bottom: 2px;
+  margin-top: 8px;
+  transition: opacity 0.2s;
+}
+.villa-link:hover { opacity: 0.7; }
+
+/* ── INCLUDED ── */
+.included { background: var(--cream); }
+.included-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 56px;
+}
+.inc-col {
+  background: var(--card);
+  padding: 52px 48px;
+}
+.inc-label-text {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--green);
+}
+.exc-col .inc-label-text {
+  border-bottom-color: var(--border2);
+}
+.inc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.inc-list li {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text2);
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.inc-list li:last-child { border-bottom: none; }
+.inc-list li::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+.exc-list li::before { background: var(--border2); }
+.inc-note {
+  margin-top: 24px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text3);
+  font-style: italic;
+  border-left: 2px solid var(--amber);
+  padding-left: 14px;
+}
+
+/* ── PRICE ── */
+.price { background: var(--cream2); text-align: center; }
+.price-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 64px 56px;
+}
+.price-tag {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--green2);
+  display: block;
+  margin-bottom: 20px;
+}
+.price-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 100px;
+  font-weight: 300;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.price-amount sup {
+  font-size: 44px;
+  vertical-align: 0.4em;
+  font-weight: 300;
+}
+.price-note {
+  font-size: 13px;
+  color: var(--text3);
+  letter-spacing: 0.5px;
+  margin-bottom: 36px;
+}
+.price-items {
+  list-style: none;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+.price-items li {
+  font-size: 15px;
+  color: var(--text2);
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.price-items li:last-child { border-bottom: none; }
+.price-items li::before {
+  content: '—';
+  color: var(--green);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+/* ── BOOKING ── */
+.booking {
+  background: var(--green);
+  padding: 104px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.booking::before {
+  content: 'Маврикий';
+  position: absolute;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 260px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.04);
+  white-space: nowrap;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  user-select: none;
+}
+.booking-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 16px;
+  display: block;
+  position: relative;
+}
+.booking-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 6vw, 84px);
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 52px;
+  position: relative;
+}
+.booking-title em { font-style: italic; opacity: 0.7; }
+.booking-steps {
+  display: flex;
+  justify-content: center;
+  max-width: 720px;
+  margin: 0 auto 52px;
+  gap: 0;
+  position: relative;
+}
+.booking-steps::before {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 80px; right: 80px;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+}
+.booking-step {
+  flex: 1;
+  padding: 0 20px;
+  position: relative;
+}
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.22);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.step-text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.72);
+  line-height: 1.55;
+}
+.btn-tg {
+  position: relative;
+  display: inline-block;
+  background: var(--white);
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 18px 52px;
+  transition: all 0.2s;
+}
+.btn-tg:hover {
+  background: var(--cream);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.booking-footer-text {
+  margin-top: 20px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--text);
+  padding: 52px 24px;
+  text-align: center;
+}
+.footer-inner { max-width: 1140px; margin: 0 auto; }
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.88);
+  margin-bottom: 10px;
+}
+.footer-handles {
+  font-size: 13px;
+  color: rgba(255,255,255,0.38);
+  letter-spacing: 0.5px;
+  margin-bottom: 28px;
+}
+.footer-handles a {
+  color: rgba(255,255,255,0.58);
+  transition: color 0.2s;
+}
+.footer-handles a:hover { color: rgba(255,255,255,0.9); }
+.footer-copy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 1px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .intro-inner { grid-template-columns: 1fr; gap: 40px; }
+  .intro-photo { height: 320px; }
+  .day-item, .day-item.reverse { flex-direction: column; min-height: auto; }
+  .day-photo { width: 100%; height: 320px; }
+  .day-content { padding: 40px 32px; }
+  .day-bg-num { font-size: 100px; bottom: -10px; }
+  .team-grid { grid-template-columns: 1fr; }
+  .villa-layout { grid-template-columns: 1fr; }
+  .villa-photo { height: 360px; }
+  .included-grid { grid-template-columns: 1fr; }
+  .booking-steps { flex-direction: column; gap: 32px; }
+  .booking-steps::before { display: none; }
+  .booking-step { padding: 0; }
+}
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .nav-inner { padding: 0 20px; }
+  .postcard-back { grid-template-columns: 1fr; }
+  .postcard-divider { display: none; }
+  .postcard-right { border-top: 1px solid var(--border2); }
+  .postcard-photo { height: 240px; }
+  .postcard-greeting { font-size: 22px; }
+  .postmark-row { justify-content: flex-start; }
+  .section { padding: 72px 20px; }
+  .section-title { margin-bottom: 36px; }
+  .person { padding: 40px 28px; }
+  .inc-col { padding: 40px 28px; }
+  .price-card { padding: 44px 28px; }
+  .price-amount { font-size: 72px; }
+  .team-quote { padding: 40px 28px; font-size: 24px; }
+  .villa-info { padding: 36px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════ NAV ══════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Маврикий <em>'26</em></div>
+    <ul class="nav-links">
+      <li><a href="#program">Программа</a></li>
+      <li><a href="#team">Организаторы</a></li>
+      <li><a href="#villa">Вилла</a></li>
+      <li><a href="#price">Цена</a></li>
+    </ul>
+    <a href="https://t.me/xfufx" class="nav-cta" target="_blank">Забронировать</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════ HERO POSTCARD ══════════════════════ -->
+<section class="hero">
+  <div class="postcard">
+
+    <!-- Photo half -->
+    <div class="postcard-photo">
+      <img src="Фото для сайта/IMG_7618.JPG" alt="Маврикий">
+      <div class="postcard-photo-label">Mauritius · Indian Ocean</div>
+    </div>
+
+    <!-- Paper half -->
+    <div class="postcard-back">
+
+      <!-- Left: letter -->
+      <div class="postcard-left">
+        <div>
+          <p class="postcard-greeting">Привет.<br>Мы едем на Маврикий —<br>и берём вас с собой.</p>
+        </div>
+        <div>
+          <p class="postcard-sub">16–25 августа 2026 · 10 дней<br>8 человек · всё включено</p>
+          <p class="postcard-sig">— Марк &amp; Лиза</p>
+        </div>
+      </div>
+
+      <div class="postcard-divider"></div>
+
+      <!-- Right: address + postmark -->
+      <div class="postcard-right">
+        <!-- Postmark + stamp -->
+        <div class="postmark-row">
+          <svg class="postmark-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="#2A5C3C" stroke-width="1.5"/>
+            <circle cx="50" cy="50" r="37" stroke="#2A5C3C" stroke-width="0.75" stroke-dasharray="2.5 2"/>
+            <line x1="28" y1="48" x2="72" y2="48" stroke="#2A5C3C" stroke-width="1.2"/>
+            <line x1="28" y1="52" x2="72" y2="52" stroke="#2A5C3C" stroke-width="0.5"/>
+            <line x1="28" y1="44" x2="72" y2="44" stroke="#2A5C3C" stroke-width="0.5"/>
+            <text x="50" y="31" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" fill="#2A5C3C" letter-spacing="3">МАВРИКИЙ</text>
+            <text x="50" y="72" text-anchor="middle" font-family="Inter,sans-serif" font-size="6.5" fill="#2A5C3C" letter-spacing="2">АВГУСТ 2026</text>
+          </svg>
+          <div class="stamp">
+            <img src="Фото для сайта/IMG_7627.JPG" alt="stamp">
+          </div>
+        </div>
+
+        <!-- To -->
+        <div class="address-block">
+          <span class="address-label">Кому</span>
+          <span class="address-to">Тем, кто давно хотел,<br>но всё откладывал.</span>
+        </div>
+
+        <!-- From -->
+        <div class="address-from">
+          <span class="address-label">От</span>
+          Марк &amp; Лиза · @pov.markiz × @ginger.teen
+        </div>
+      </div>
+
+    </div><!-- /postcard-back -->
+  </div><!-- /postcard -->
+
+  <div class="hero-scroll">
+    <span>Листай</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════ INTRO ══════════════════════ -->
+<section class="intro" id="intro">
+  <div class="intro-inner">
+    <div class="intro-photo">
+      <img src="Фото для сайта/IMG_7621.JPG" alt="Маврикий">
+    </div>
+    <div class="intro-text-col">
+      <p class="intro-text">
+        Маврикий — это не пляж с зонтиком. Это место, где в открытом океане живут кашалоты,
+        где с воздуха видна оптическая иллюзия <strong>подводного водопада</strong>,
+        где дельфины появляются до рассвета, а на юге острова Индийский океан
+        ни с чем не сдерживается.
+      </p>
+      <p class="intro-text">
+        Мы собрали <strong>10 дней</strong>, в которых каждый день —
+        это что-то, о чём потом рассказываешь годами.
+        Вилла на западном берегу, все активности включены, нас восемь человек.
+      </p>
+      <div class="intro-dates">
+        <div class="intro-date-item">
+          <span class="intro-date-label">Даты</span>
+          <span class="intro-date-val">16–25 августа 2026</span>
+        </div>
+        <div class="intro-date-item">
+          <span class="intro-date-label">Группа</span>
+          <span class="intro-date-val">8 человек</span>
+        </div>
+        <div class="intro-date-item">
+          <span class="intro-date-label">Дней</span>
+          <span class="intro-date-val">10</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════ PROGRAM ══════════════════════ -->
+<section class="section program" id="program">
+  <div class="section-inner">
+    <span class="section-label">10 дней · Август 2026</span>
+    <h2 class="section-title">Про<em>грамма</em></h2>
+  </div>
+
+  <div class="days-list">
+
+    <!-- DAY 1 -->
+    <div class="day-item">
+      <div class="day-photo">
+        <img src="Фото для сайта/IMG_7616.JPG" alt="День 1">
+      </div>
+      <div class="day-content">
+        <div class="day-bg-num">01</div>
+        <span class="day-tag">День 1 · Прилёт</span>
+        <h3 class="day-title">Прилёт</h3>
+        <div class="day-body">
+          <p>Час на машине от аэропорта до запада острова — лучшей его части. Тихие бухты, нет ветра, закаты, которые сложно описать словами.</p>
+          <p>После заселения — ужин. Знакомимся, обсуждаем план. Первый вечер всегда самый особенный.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day-item reverse">
+      <div class="day-photo">
+        <img src="Фото для сайта/IMG_7620.JPG" alt="День 2">
+      </div>
+      <div class="day-content">
+        <div class="day-bg-num">02</div>
+        <span class="day-tag">День 2 · До рассвета</span>
+        <h3 class="day-title">До рассвета</h3>
+        <div class="day-body">
+          <p>Подъём раньше солнца. Выходим в открытый океан, пока ещё темно — именно в этот момент <strong>дикие дельфины-спиннеры</strong> появляются у западного берега. Прыгаем в воду и плывём рядом.</p>
+          <p>Не в аквапарке, не в бассейне — в настоящем Индийском океане. Один из самых тихих и одновременно самых живых дней тура.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="day-item">
+      <div class="day-photo">
+        <img src="Фото для сайта/IMG_7622.JPG" alt="День 3">
+      </div>
+      <div class="day-content">
+        <div class="day-bg-num">03</div>
+        <span class="day-tag">День 3 · Гидросамолёт</span>
+        <h3 class="day-title">С высоты</h3>
+        <div class="day-body">
+          <p>Один пассажир и пилот. Летим над <strong>«подводным водопадом»</strong> у мыса Ле-Морн — оптической иллюзией, которую видно только с воздуха.</p>
+          <p>Каждый летит отдельно — никаких компромиссов по виду.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div class="day-item reverse">
+      <div class="day-photo">
+        <img src="Фото для сайта/IMG_7623.JPG" alt="День 4">
+      </div>
+      <div class="day-content">
+        <div class="day-bg-num">04</div>
+        <span class="day-tag">День 4</span>
+        <h3 class="day-title">Юг</h3>
+        <div class="day-body">
+          <p>Едем на юг — самую нетуристическую и при этом самую красивую часть острова. Семицветные пески Шамарель. <strong>110-метровый водопад</strong>, в котором можно искупаться, гигантские черепахи — кормим с рук.</p>
+          <p>Потом мыс Гри-Гри: единственная точка острова без рифа, где Индийский океан ни с чем не сдерживается. И водопад Рочестер — природный бассейн между скалами.</p>
+          <p><em>Длинный день. Один из лучших.</em></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 5 -->
+    <div class="day-item">
+      <div class="day-photo">
+        <img src="Фото для сайта/IMG_7627.JPG" alt="День 5">
+      </div>
+      <div class="day-content">
+        <div class="day-bg-num">05</div>
+        <span class="day-tag">День 5 · Единственное место в мире</span>
+        <h3 class="day-title">Киты</h3>
+        <div class="day-body">
+          <p><strong>Кашалоты</strong> живут у берегов Маврикия круглый год — единственное место, где с ними можно плавать. 4 часа в море. Подводный гид снимает каждого рядом с китами.</p>
+          <p>Вероятность встречи — 90%. Оставшиеся 10% — это просто океан, и это тоже неплохо.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 6 -->
+    <div class="day-item reverse">
+      <div class="day-photo">
+        <img src="Йога/IMG_7700.JPG" alt="День 6">
+      </div>
+      <div class="day-content">
+        <div class="day-bg-num">06</div>
+        <span class="day-tag">День 6 · Свободный</span>
+        <h3 class="day-title">Сво<em>бодный</em></h3>
+        <div class="day-body">
+          <p>Никакого плана. С утра — йога у бассейна для тех, кто хочет. После вчерашнего океана тело скажет спасибо.</p>
+          <p>А дальше — отдых, созерцание и наслаждение. Бухта у апартаментов, снорклинг, кораллы, рыбы, иногда черепахи... Или просто лежать и смотреть в небо. Никто никуда не торопится.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 7 -->
+    <div class="day-item">
+      <div class="day-photo">
+        <img src="Фото для сайта/IMG_7617.JPG" alt="День 7">
+      </div>
+      <div class="day-content">
+        <div class="day-bg-num">07</div>
+        <span class="day-tag">День 7 · Casela Nature Park</span>
+        <h3 class="day-title">Сафари</h3>
+        <div class="day-body">
+          <p>С утра кормим жирафов с рук — они наклоняются прямо к тебе, это немного странно и очень круто. Потом идём к <strong>львам</strong> — не смотреть через забор, а выходить в вольер рядом с ними.</p>
+          <p>После — сафари на эко-байках по парку: зебры, носороги, страусы, антилопы. Один из тех дней, которые сложно объяснить заранее.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 8 -->
+    <div class="day-item reverse">
+      <div class="day-photo">
+        <img src="Фото для сайта/IMG_7625.JPG" alt="День 8">
+      </div>
+      <div class="day-content">
+        <div class="day-bg-num">08</div>
+        <span class="day-tag">День 8 · Только наша компания</span>
+        <h3 class="day-title">Яхта</h3>
+        <div class="day-body">
+          <p>Весь день на воде — только наша компания на катамаране. Идём на север к <strong>необитаемым островам</strong>. Снорклинг у нетронутых рифов, которых не видно с берега.</p>
+          <p>Обед — BBQ прямо на борту: рыба, морепродукты, всё свежее. Возвращаемся с закатом.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 9 -->
+    <div class="day-item">
+      <div class="day-photo">
+        <img src="Фото для сайта/IMG_7632.JPG" alt="День 9">
+      </div>
+      <div class="day-content">
+        <div class="day-bg-num">09</div>
+        <span class="day-tag">День 9</span>
+        <h3 class="day-title">Водопады<br>&amp; Порт-Луи</h3>
+        <div class="day-body">
+          <p>Начинаем с треккинга на <strong>7 каскадов</strong> — спускаемся по джунглям, купаемся в природных бассейнах, прыгаем там, где хочется. После — чайные плантации Bois Chéri и дегустация рома Chamarel.</p>
+          <p>Заканчиваем в Порт-Луи: рынок, стритфуд, китайский квартал. Самый живой город острова.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 10 -->
+    <div class="day-item reverse">
+      <div class="day-photo">
+        <img src="Фото для сайта/IMG_7621.JPG" alt="День 10">
+      </div>
+      <div class="day-content">
+        <div class="day-bg-num">10</div>
+        <span class="day-tag">День 10 · Последнее утро</span>
+        <h3 class="day-title">Последнее<br>утро</h3>
+        <div class="day-body">
+          <p>Пляж, океан, кофе. По желанию — серфинг, массаж, просто ничего.</p>
+          <p>Трансфер в аэропорт.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /days-list -->
+</section>
+
+
+<!-- ══════════════════════ TEAM ══════════════════════ -->
+<section class="section team" id="team" style="padding-bottom: 0;">
+  <div class="section-inner">
+    <span class="section-label">Авторский тур</span>
+    <h2 class="section-title">Кто <em>везёт</em></h2>
+    <div class="team-grid">
+      <div class="person">
+        <div class="person-name">Марк</div>
+        <span class="person-handle">@pov.markiz</span>
+        <div class="person-text">
+          <p>Я веду людей в путешествия уже несколько лет. Турция, Канары, Мадейра, Япония... Каждый раз думаю — ну вот, теперь точно всё видел. А потом узнаю что-то, от чего снова загораются глаза.</p>
+          <p>На этот раз это киты. Кашалоты, которые живут у берегов Маврикия круглый год и с которыми можно плыть в открытом океане. Я капитан, я провёл в море не одну сотню часов — но такого у меня ещё не было. Еду за этим. И везу вас.</p>
+        </div>
+      </div>
+      <div class="person">
+        <div class="person-name">Лиза</div>
+        <span class="person-handle">@ginger.teen</span>
+        <div class="person-text">
+          <p>40 стран — и всё равно есть места, которые ты откладываешь. Маврикий у меня в списке давно. Остров, который выглядит как заставка на рабочий стол, но внутри оказывается совсем другим — диким, живым, непохожим ни на что.</p>
+          <p>Когда Марк сказал «едем плавать с китами» — я не думала долго. Есть вещи, которые просто надо сделать.</p>
+        </div>
+      </div>
+      <div class="team-quote">
+        «Мы не просто везём вас на остров. Мы едем туда вместе.»
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════ VILLA ══════════════════════ -->
+<section class="section villa" id="villa">
+  <div class="section-inner">
+    <span class="section-label">Западный берег · Тамарин</span>
+    <h2 class="section-title">Где <em>живём</em></h2>
+    <div class="villa-layout">
+      <div class="villa-photo">
+        <img src="Фото для сайта/IMG_7629.JPG" alt="Вилла">
+      </div>
+      <div class="villa-info">
+        <div>
+          <p class="villa-desc">Вилла на западном берегу — лучшей части острова. Тамарин. Закаты прямо из окна, дельфины в соседней бухте, до всех активностей 20–30 минут. Вся вилла только для нашей группы.</p>
+          <a href="https://www.airbnb.ru" class="villa-link" target="_blank">Посмотреть на Airbnb →</a>
+        </div>
+        <div class="villa-features">
+          <div class="feature">
+            <div class="feature-icon">🏡</div>
+            <div class="feature-text">
+              <strong>Только мы</strong>
+              <span>Вся вилла для группы, без чужих</span>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🏊</div>
+            <div class="feature-text">
+              <strong>Частный бассейн</strong>
+              <span>С видом на горы и закат</span>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🌅</div>
+            <div class="feature-text">
+              <strong>Западный берег</strong>
+              <span>Лучшие закаты острова — каждый вечер</span>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🐬</div>
+            <div class="feature-text">
+              <strong>Дельфины рядом</strong>
+              <span>Соседняя бухта — рассвет с дельфинами в 5 минутах</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════ INCLUDED ══════════════════════ -->
+<section class="section included" id="included">
+  <div class="section-inner">
+    <span class="section-label">Стоимость</span>
+    <h2 class="section-title">Что <em>входит</em></h2>
+    <div class="included-grid">
+      <div class="inc-col">
+        <span class="inc-label-text">Включено в стоимость</span>
+        <ul class="inc-list">
+          <li>10 ночей на вилле — только наша группа</li>
+          <li>Рассвет с дикими дельфинами-спиннерами</li>
+          <li>Гидросамолёт над подводным водопадом</li>
+          <li>Плавание с кашалотами + подводная съёмка</li>
+          <li>Casela: жирафы, прогулка со львами, эко-сафари</li>
+          <li>День на катамаране + BBQ на борту</li>
+          <li>Треккинг 7 каскадов</li>
+          <li>Трансферы аэропорт ↔ вилла</li>
+          <li>Минивэн по острову на все 10 дней</li>
+          <li>Туристический сбор (€3/ночь)</li>
+          <li>Приветственный ужин в день 1</li>
+          <li>Марк и Лиза рядом каждый день</li>
+        </ul>
+      </div>
+      <div class="inc-col exc-col">
+        <span class="inc-label-text">Не входит</span>
+        <ul class="inc-list exc-list">
+          <li>Авиабилеты</li>
+          <li>Питание — кроме ужина в день 1 и BBQ на яхте</li>
+          <li>Страховка (обязательна)</li>
+          <li>Личные расходы и сувениры</li>
+        </ul>
+        <p class="inc-note">
+          Страховка должна покрывать водные активности и снорклинг в открытом океане.
+          Без неё — к активностям не допускаем. Это не каприз, это ваша безопасность.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════ PRICE ══════════════════════ -->
+<section class="section price" id="price">
+  <div class="section-inner">
+    <span class="section-label" style="text-align:center;">Участие</span>
+    <h2 class="section-title" style="text-align:center;">Цена <em>тура</em></h2>
+    <div class="price-card">
+      <span class="price-tag">На человека · без авиабилетов</span>
+      <div class="price-amount"><sup>€</sup>2500</div>
+      <div class="price-note">16–25 августа · 10 дней · 8 мест</div>
+      <ul class="price-items">
+        <li>Вилла на 10 ночей</li>
+        <li>Все активности по программе</li>
+        <li>Транспорт по острову</li>
+        <li>Подводная съёмка с китами</li>
+        <li>Приветственный ужин и BBQ на яхте</li>
+        <li>Туристический сбор</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════ BOOKING ══════════════════════ -->
+<section class="booking" id="booking">
+  <span class="booking-label">Как попасть</span>
+  <h2 class="booking-title">Напиши нам<br><em>в Telegram</em></h2>
+  <div class="booking-steps">
+    <div class="booking-step">
+      <div class="step-num">01</div>
+      <div class="step-text">Напишите Марку в Telegram — ответим быстро и без скриптов</div>
+    </div>
+    <div class="booking-step">
+      <div class="step-num">02</div>
+      <div class="step-text">Обсудим детали, ответим на все вопросы</div>
+    </div>
+    <div class="booking-step">
+      <div class="step-num">03</div>
+      <div class="step-text">Место закрепляется после предоплаты</div>
+    </div>
+  </div>
+  <a href="https://t.me/xfufx" class="btn-tg" target="_blank">Написать в Telegram</a>
+  <div class="booking-footer-text">Осталось 8 мест · 16–25 августа 2026</div>
+</section>
+
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Маврикий '26</div>
+    <div class="footer-handles">
+      <a href="https://instagram.com/pov.markiz" target="_blank">@pov.markiz</a>
+      &nbsp;×&nbsp;
+      <a href="https://instagram.com/ginger.teen" target="_blank">@ginger.teen</a>
+    </div>
+    <div class="footer-copy">Авторский тур · Август 2026 · Индийский океан</div>
+  </div>
+</footer>
+
+</body>
+</html>
