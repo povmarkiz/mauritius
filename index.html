@@ -1534,5 +1534,58 @@ footer {
   </div>
 </footer>
 
+<script>
+(function () {
+  const track   = document.getElementById('carouselTrack');
+  const dots    = document.querySelectorAll('#villaCarousel .carousel-dot');
+  const thumbs  = document.querySelectorAll('#carouselThumbs .carousel-thumb');
+  const counter = document.getElementById('carouselCounter');
+  const total   = dots.length;
+  let current   = 0;
+  let startX    = 0;
+  let isDragging = false;
+  let autoTimer;
+
+  function goTo(n) {
+    current = (n + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i)   => d.classList.toggle('active', i === current));
+    thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
+    counter.textContent = `${current + 1} / ${total}`;
+  }
+
+  function resetAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo(current + 1), 5000);
+  }
+
+  document.querySelector('.carousel-btn-prev').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+  document.querySelector('.carousel-btn-next').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+  dots.forEach((d, i)   => d.addEventListener('click', () => { goTo(i); resetAuto(); }));
+  thumbs.forEach((t, i) => t.addEventListener('click', () => { goTo(i); resetAuto(); }));
+
+  /* Touch / mouse drag */
+  function onStart(x) { startX = x; isDragging = true; }
+  function onEnd(x) {
+    if (!isDragging) return;
+    isDragging = false;
+    const dx = x - startX;
+    if (Math.abs(dx) > 44) { goTo(current + (dx < 0 ? 1 : -1)); resetAuto(); }
+  }
+
+  track.addEventListener('touchstart', e => onStart(e.touches[0].clientX), { passive: true });
+  track.addEventListener('touchend',   e => onEnd(e.changedTouches[0].clientX), { passive: true });
+  track.addEventListener('mousedown',  e => onStart(e.clientX));
+  track.addEventListener('mouseup',    e => onEnd(e.clientX));
+
+  document.getElementById('villaCarousel').addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft')  { goTo(current - 1); resetAuto(); }
+    if (e.key === 'ArrowRight') { goTo(current + 1); resetAuto(); }
+  });
+
+  goTo(0);
+  resetAuto();
+})();
+</script>
 </body>
 </html>
