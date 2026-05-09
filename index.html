@@ -589,6 +589,147 @@ nav {
 }
 .villa-link:hover { opacity: 0.7; }
 
+/* ── VILLA CAROUSEL ── */
+.villa-left {
+  display: flex;
+  flex-direction: column;
+}
+.villa-carousel {
+  position: relative;
+  flex: 1;
+  min-height: 460px;
+  overflow: hidden;
+  background: var(--cream3);
+}
+.carousel-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.52s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+}
+.carousel-slide img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 50%;
+  display: block;
+}
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(253,250,245,0.9);
+  border: none;
+  width: 44px; height: 44px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  backdrop-filter: blur(4px);
+}
+.carousel-btn:hover { background: var(--white); }
+.carousel-btn-prev { left: 16px; }
+.carousel-btn-next { right: 16px; }
+.carousel-btn svg {
+  width: 16px; height: 16px;
+  stroke: var(--green);
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.carousel-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 7px;
+  z-index: 10;
+}
+.carousel-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.45);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.carousel-dot.active {
+  background: var(--white);
+  transform: scale(1.35);
+}
+.carousel-counter {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 1px;
+  background: rgba(26,34,24,0.35);
+  padding: 3px 8px;
+  backdrop-filter: blur(4px);
+}
+
+/* ── CAROUSEL THUMBNAILS ── */
+.carousel-thumbs {
+  display: flex;
+  gap: 3px;
+  background: var(--text);
+  padding: 3px;
+  flex-shrink: 0;
+}
+.carousel-thumb {
+  flex: 1;
+  height: 72px;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  background: var(--cream3);
+  transition: opacity 0.2s;
+}
+.carousel-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.35s ease;
+}
+.carousel-thumb:hover img { transform: scale(1.06); }
+/* dim overlay on inactive thumbs */
+.carousel-thumb::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 34, 24, 0.42);
+  transition: opacity 0.2s;
+  z-index: 1;
+}
+.carousel-thumb.active::before { opacity: 0; }
+/* green bottom bar on active */
+.carousel-thumb::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--green2);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+  z-index: 2;
+}
+.carousel-thumb.active::after { transform: scaleX(1); }
+
 /* ── INCLUDED ── */
 .included { background: var(--cream); }
 .included-grid {
@@ -850,7 +991,9 @@ footer {
   .day-bg-num { font-size: 100px; bottom: -10px; }
   .team-grid { grid-template-columns: 1fr; }
   .villa-layout { grid-template-columns: 1fr; }
-  .villa-photo { height: 360px; }
+  .villa-carousel { min-height: 280px; }
+  .carousel-thumbs { height: 60px; }
+  .carousel-thumb { height: 60px; }
   .included-grid { grid-template-columns: 1fr; }
   .booking-steps { flex-direction: column; gap: 32px; }
   .booking-steps::before { display: none; }
@@ -1195,9 +1338,63 @@ footer {
     <span class="section-label">Западный берег · Тамарин</span>
     <h2 class="section-title">Где <em>живём</em></h2>
     <div class="villa-layout">
-      <div class="villa-photo">
-        <img src="photos/villa/bb37b79a-c214-4037-b2ee-52ddfcc5fd89.avif" alt="Вилла">
+      <!-- CAROUSEL + THUMBS -->
+      <div class="villa-left">
+      <div class="villa-carousel" id="villaCarousel">
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-slide">
+            <img src="photos/villa/IMG_7629.JPG" alt="Вилла — бассейн с видом на горы">
+          </div>
+          <div class="carousel-slide">
+            <img src="photos/villa/IMG_7618.JPG" alt="Бухта Тамарин">
+          </div>
+          <div class="carousel-slide">
+            <img src="photos/villa/IMG_7619.JPG" alt="Маврикийские воды">
+          </div>
+          <div class="carousel-slide">
+            <img src="photos/villa/IMG_7624.JPG" alt="Группа у гор">
+          </div>
+        </div>
+
+        <!-- Prev -->
+        <button class="carousel-btn carousel-btn-prev" aria-label="Предыдущее фото">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+
+        <!-- Next -->
+        <button class="carousel-btn carousel-btn-next" aria-label="Следующее фото">
+          <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+        </button>
+
+        <!-- Dots -->
+        <div class="carousel-dots">
+          <button class="carousel-dot active" aria-label="Фото 1"></button>
+          <button class="carousel-dot" aria-label="Фото 2"></button>
+          <button class="carousel-dot" aria-label="Фото 3"></button>
+          <button class="carousel-dot" aria-label="Фото 4"></button>
+        </div>
+
+        <!-- Counter -->
+        <div class="carousel-counter" id="carouselCounter">1 / 4</div>
+      </div><!-- /villa-carousel -->
+
+      <!-- THUMBNAILS -->
+      <div class="carousel-thumbs" id="carouselThumbs">
+        <button class="carousel-thumb active" data-index="0" aria-label="Фото 1">
+          <img src="photos/villa/IMG_7629.JPG" alt="Вилла">
+        </button>
+        <button class="carousel-thumb" data-index="1" aria-label="Фото 2">
+          <img src="photos/villa/IMG_7618.JPG" alt="Бухта">
+        </button>
+        <button class="carousel-thumb" data-index="2" aria-label="Фото 3">
+          <img src="photos/villa/IMG_7619.JPG" alt="Океан">
+        </button>
+        <button class="carousel-thumb" data-index="3" aria-label="Фото 4">
+          <img src="photos/villa/IMG_7624.JPG" alt="Природа">
+        </button>
       </div>
+
+      </div><!-- /villa-left -->
       <div class="villa-info">
         <div>
           <p class="villa-desc">Вилла на западном берегу — лучшей части острова. Тамарин. Закаты прямо из окна, дельфины в соседней бухте, до всех активностей 20–30 минут. Вся вилла только для нашей группы.</p>
@@ -1236,6 +1433,7 @@ footer {
     </div>
   </div>
 </section>
+
 
 
 <!-- ══════════════════════ INCLUDED ══════════════════════ -->
