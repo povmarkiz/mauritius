@@ -102,6 +102,14 @@ nav {
   background: var(--cream);
 }
 
+a.person-handle {
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+a.person-handle:hover {
+  opacity: 0.7;
+}
+
 /* Paper texture via subtle CSS noise */
 .hero::before {
   content: '';
@@ -1089,7 +1097,7 @@ footer {
         <!-- From -->
         <div class="address-from">
           <span class="address-label">От</span>
-          Марк &amp; Лиза · @pov.markiz × @ginger.teen
+          Марк &amp; Лиза · <a href="https://instagram.com/pov.markiz" target="_blank" class="person-handle"></a>@pov.markiz</a> × <a href="https://instagram.com/ginger.teen" target="_blank" class="person-handle">@ginger.teen</a>
         </div>
       </div>
 
@@ -1312,7 +1320,7 @@ footer {
     <div class="team-grid">
       <div class="person">
         <div class="person-name">Марк</div>
-        <span class="person-handle">@pov.markiz</span>
+        <a href="https://instagram.com/pov.markiz" target="_blank" class="person-handle">@pov.markiz</a>
         <div class="person-text">
           <p>Я веду людей в путешествия уже несколько лет. Турция, Канары, Мадейра, Япония... Каждый раз думаю — ну вот, теперь точно всё видел. А потом узнаю что-то, от чего снова загораются глаза.</p>
           <p>На этот раз это киты. Кашалоты, которые живут у берегов Маврикия круглый год и с которыми можно плыть в открытом океане. Я капитан, я провёл в море не одну сотню часов — но такого у меня ещё не было. Еду за этим. И везу вас.</p>
@@ -1320,7 +1328,7 @@ footer {
       </div>
       <div class="person">
         <div class="person-name">Лиза</div>
-        <span class="person-handle">@ginger.teen</span>
+      <a href="https://instagram.com/ginger.teen" target="_blank" class="person-handle">@ginger.teen</a>
         <div class="person-text">
           <p>40 стран — и всё равно есть места, которые ты откладываешь. Маврикий у меня в списке давно. Остров, который выглядит как заставка на рабочий стол, но внутри оказывается совсем другим — диким, живым, непохожим ни на что.</p>
           <p>Когда Марк сказал «едем плавать с китами» — я не думала долго. Есть вещи, которые просто надо сделать.</p>
