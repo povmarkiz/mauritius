@@ -121,7 +121,9 @@ a.person-handle:hover {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 128px;
 }
-
+.address-from {
+  white-space: nowrap;
+}
 .postcard {
   position: relative;
   z-index: 1;
@@ -495,6 +497,15 @@ a.person-handle:hover {
   color: var(--text);
   line-height: 1;
   margin-bottom: 6px;
+}
+
+.person-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  margin-bottom: 16px;
 }
 .person-handle {
   font-size: 11px;
@@ -1097,9 +1108,11 @@ footer {
         <!-- From -->
         <div class="address-from">
           <span class="address-label">От</span>
-          Марк &amp; Лиза · <a href="https://instagram.com/pov.markiz" target="_blank" class="person-handle"></a>@pov.markiz</a> × <a href="https://instagram.com/ginger.teen" target="_blank" class="person-handle">@ginger.teen</a>
+          Марк &amp; Лиза ·
+          <a href="https://instagram.com/pov.markiz" target="_blank" class="person-handle">@pov.markiz</a>
+          ×
+          <a href="https://instagram.com/ginger.teen" target="_blank" class="person-handle">@ginger.teen</a>
         </div>
-      </div>
 
     </div><!-- /postcard-back -->
   </div><!-- /postcard -->
@@ -1319,6 +1332,7 @@ footer {
     <h2 class="section-title">Кто <em>везёт</em></h2>
     <div class="team-grid">
       <div class="person">
+        <img src="photos/mark.jpg" class="person-avatar" alt="Марк">
         <div class="person-name">Марк</div>
         <a href="https://instagram.com/pov.markiz" target="_blank" class="person-handle">@pov.markiz</a>
         <div class="person-text">
@@ -1327,6 +1341,7 @@ footer {
         </div>
       </div>
       <div class="person">
+        <img src="photos/lisa.jpg" class="person-avatar" alt="Лиза">
         <div class="person-name">Лиза</div>
       <a href="https://instagram.com/ginger.teen" target="_blank" class="person-handle">@ginger.teen</a>
         <div class="person-text">
