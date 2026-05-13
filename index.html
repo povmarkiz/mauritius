@@ -282,7 +282,7 @@ a.person-handle:hover {
 }
 .address-from {
   border-top: 1px solid var(--border);
-  padding-top: 10px;
+  padding-top: 20px;
   font-size: 12.5px;
   color: var(--text3);
   letter-spacing: 0.3px;
@@ -290,41 +290,6 @@ a.person-handle:hover {
 
 }
 
-/* Hero scroll indicator */
-.hero-scroll {
-  position: relative;
-  z-index: 1;
-  margin-top: 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  color: var(--text3);
-  font-size: 10px;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-}
-.scroll-line {
-  width: 1px;
-  height: 44px;
-  background: var(--border);
-  position: relative;
-  overflow: hidden;
-}
-.scroll-line::after {
-  content: '';
-  position: absolute;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: var(--green);
-  animation: line-drop 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-}
-@keyframes line-drop {
-  0%   { top: -50%; }
-  100% { top: 150%; }
-}
 
 /* ── SECTION COMMONS ── */
 .section {
@@ -1133,11 +1098,6 @@ footer {
 
     </div><!-- /postcard-back -->
   </div><!-- /postcard -->
-
-  <div class="hero-scroll">
-    <span>Листай</span>
-    <div class="scroll-line"></div>
-  </div>
 </section>
 
 
