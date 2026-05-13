@@ -1033,7 +1033,7 @@ footer {
 @media (max-width: 640px) {
   .nav-links { display: none; }
   .nav-inner { padding: 0 20px; }
-  .postcard-back { grid-template-columns: 1fr; }
+  .postcard-back { grid-template-columns: 1fr; position: relative; } /* добавь position: relative */
   .postcard-divider { display: none; }
   .postcard-right { border-top: 1px solid var(--border2); }
   .postcard-photo { height: 240px; }
@@ -1047,6 +1047,14 @@ footer {
   .price-amount { font-size: 72px; }
   .team-quote { padding: 40px 28px; font-size: 24px; }
   .villa-info { padding: 36px 28px; }
+  .postmark-row {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+  .postcard-left {
+    padding-top: 90px; /* место под марки */
+  }
 }
 </style>
 </head>
