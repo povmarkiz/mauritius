@@ -422,7 +422,7 @@ a.person-handle:hover {
 
 .day-item {
   display: flex;
-  min-height: 500px;
+  min-height: 320px;
   border-top: 1px solid var(--border);
 }
 .day-item:last-child { border-bottom: 1px solid var(--border); }
@@ -445,7 +445,7 @@ a.person-handle:hover {
 .day-content {
   flex: 1;
   background: var(--card);
-  padding: 56px 60px;
+  padding: 36px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -466,11 +466,11 @@ a.person-handle:hover {
 }
 .day-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(36px, 3.5vw, 52px);
+  font-size: clamp(24px, 2.5vw, 36px); /* было clamp(36px, 3.5vw, 52px) */
   font-weight: 400;
   line-height: 1.12;
   color: var(--text);
-  margin-bottom: 26px;
+  margin-bottom: 16px; /* было 26px */
 }
 .day-title em { font-style: italic; color: var(--green); }
 .day-body {
@@ -1308,7 +1308,7 @@ footer {
         <div class="day-bg-num">09</div>
         <h3 class="day-title">День 9 · Водопады & Порт-Луи</h3>
         <div class="day-body">
-          <p>Начинаем с треккинга на <strong>7 каскадов</strong> — спускаемся по джунглям, купаемся в природных бассейнах, прыгаем там, где хочется. После — чайные плантации Bois Chéri и дегустация рома Chamarel.</p>
+          <p>Начинаем с треккинга на <strong>Треккинг по джунглям к водопаду</strong> — спускаемся по джунглям, купаемся в природных бассейнах, прыгаем там, где хочется. После — чайные плантации Bois Chéri и дегустация рома Chamarel.</p>
           <p>Заканчиваем в Порт-Луи: рынок, стритфуд, китайский квартал. Самый живой город острова.</p>
         </div>
       </div>
@@ -1484,7 +1484,7 @@ footer {
           <li>Плавание с кашалотами + подводная съёмка</li>
           <li>Casela: жирафы, прогулка со львами, эко-сафари</li>
           <li>День на катамаране + BBQ на борту</li>
-          <li>Треккинг 7 каскадов</li>
+          <li>Треккинг по джунглям к водопаду</li>
           <li>Трансферы аэропорт ↔ вилла</li>
           <li>Минивэн по острову на все 10 дней</li>
           <li>Приветственный ужин в день 1</li>
@@ -1515,16 +1515,15 @@ footer {
     <span class="section-label" style="text-align:center;">Участие</span>
     <h2 class="section-title" style="text-align:center;">Цена <em>тура</em></h2>
     <div class="price-card">
-      <span class="price-tag">На человека · без авиабилетов</span>
+      <span class="price-tag">На человека</span>
       <div class="price-amount"><sup>€</sup>2500</div>
       <div class="price-note">16–25 августа · 10 дней · 8 мест</div>
       <ul class="price-items">
         <li>Вилла на 10 ночей</li>
         <li>Все активности по программе</li>
         <li>Транспорт по острову</li>
-        <li>Подводная съёмка с китами</li>
+        <li>Съёмки на камеру, дрон и под водой</li>
         <li>Маршрут и отличное настроение</li>
-        <li>Туристический сбор</li>
       </ul>
     </div>
   </div>
