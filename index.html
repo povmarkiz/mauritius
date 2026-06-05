@@ -594,8 +594,8 @@ a.person-handle:hover {
 }
 @media (max-width: 768px) {
   .villa-carousel {
-    height: auto;
-    aspect-ratio: 4/3;
+    height: 260px;
+    aspect-ratio: unset;
   }
 }
 .carousel-track {
@@ -1020,6 +1020,61 @@ footer {
   .postcard-left {
     padding-top: 90px; /* место под марки */
   }
+}
+
+/* ── LIGHTBOX ── */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox.open { display: flex; }
+.lb-img-wrap {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px;
+}
+.lb-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.lb-close {
+  position: absolute;
+  top: 20px; right: 24px;
+  background: none; border: none;
+  color: white; font-size: 36px;
+  cursor: pointer; opacity: 0.7;
+  transition: opacity 0.2s; line-height: 1;
+  z-index: 2;
+}
+.lb-close:hover { opacity: 1; }
+.lb-prev, .lb-next {
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  border: none; color: white; font-size: 28px;
+  width: 52px; height: 52px; border-radius: 50%;
+  cursor: pointer; display: flex;
+  align-items: center; justify-content: center;
+  transition: background 0.2s;
+  z-index: 2;
+}
+.lb-prev:hover, .lb-next:hover { background: rgba(255,255,255,0.25); }
+.lb-prev { left: 20px; }
+.lb-next { right: 20px; }
+.lb-counter {
+  position: absolute; bottom: 24px;
+  left: 50%; transform: translateX(-50%);
+  color: rgba(255,255,255,0.45);
+  font-size: 11px; letter-spacing: 1px;
+}
+@media (max-width: 640px) {
+  .lb-img-wrap { padding: 56px 12px; }
+  .lb-prev { left: 8px; }
+  .lb-next { right: 8px; }
 }
 </style>
 </head>
@@ -1535,6 +1590,15 @@ footer {
   </div>
 </footer>
 
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox">
+  <button class="lb-close">×</button>
+  <button class="lb-prev">‹</button>
+  <button class="lb-next">›</button>
+  <div class="lb-img-wrap"><img id="lb-img" src="" alt=""></div>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
 <script>
 (function () {
   const track   = document.getElementById('carouselTrack');
@@ -1544,6 +1608,7 @@ footer {
   const total   = dots.length;
   let current   = 0;
   let startX    = 0;
+  let startY    = 0;
   let isDragging = false;
   let autoTimer;
 
@@ -1574,10 +1639,33 @@ footer {
     if (Math.abs(dx) > 44) { goTo(current + (dx < 0 ? 1 : -1)); resetAuto(); }
   }
 
-  track.addEventListener('touchstart', e => onStart(e.touches[0].clientX), { passive: true });
-  track.addEventListener('touchend',   e => onEnd(e.changedTouches[0].clientX), { passive: true });
-  track.addEventListener('mousedown',  e => onStart(e.clientX));
-  track.addEventListener('mouseup',    e => onEnd(e.clientX));
+  track.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    isDragging = true;
+  }, { passive: true });
+
+  track.addEventListener('touchmove', e => {
+    if (!isDragging) return;
+    const dx = Math.abs(e.touches[0].clientX - startX);
+    const dy = Math.abs(e.touches[0].clientY - startY);
+    if (dx > dy) e.preventDefault();
+  }, { passive: false });
+
+  track.addEventListener('touchend', e => {
+    if (!isDragging) return;
+    isDragging = false;
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 44) { goTo(current + (dx < 0 ? 1 : -1)); resetAuto(); }
+  });
+
+  track.addEventListener('mousedown',  e => { startX = e.clientX; isDragging = true; });
+  track.addEventListener('mouseup',    e => {
+    if (!isDragging) return;
+    isDragging = false;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 44) { goTo(current + (dx < 0 ? 1 : -1)); resetAuto(); }
+  });
 
   document.getElementById('villaCarousel').addEventListener('keydown', e => {
     if (e.key === 'ArrowLeft')  { goTo(current - 1); resetAuto(); }
@@ -1586,6 +1674,46 @@ footer {
 
   goTo(0);
   resetAuto();
+})();
+
+/* ── ЛАЙТБОКС ── */
+(function () {
+  const slides = document.querySelectorAll('.carousel-slide img');
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbCounter = document.getElementById('lb-counter');
+  const images = Array.from(slides).map(img => ({ src: img.src, alt: img.alt }));
+  let cur = 0, lbStartX = 0;
+
+  function show() {
+    lbImg.src = images[cur].src;
+    lbImg.alt = images[cur].alt;
+    lbCounter.textContent = `${cur + 1} / ${images.length}`;
+  }
+  function open(i) { cur = i; show(); lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function close() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+  function prev() { cur = (cur - 1 + images.length) % images.length; show(); }
+  function next() { cur = (cur + 1) % images.length; show(); }
+
+  slides.forEach((img, i) => { img.style.cursor = 'zoom-in'; img.addEventListener('click', () => open(i)); });
+
+  document.querySelector('.lb-close').addEventListener('click', close);
+  document.querySelector('.lb-prev').addEventListener('click', prev);
+  document.querySelector('.lb-next').addEventListener('click', next);
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') prev();
+    if (e.key === 'ArrowRight') next();
+  });
+
+  lb.addEventListener('touchstart', e => { lbStartX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - lbStartX;
+    if (Math.abs(dx) > 44) { dx < 0 ? next() : prev(); }
+  });
 })();
 </script>
 </body>
